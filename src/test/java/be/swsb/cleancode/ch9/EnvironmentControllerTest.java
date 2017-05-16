@@ -4,60 +4,63 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static be.swsb.cleancode.ch9.EnvironmentController.*;
-import static org.junit.Assert.assertEquals;
+import static be.swsb.cleancode.ch9.MockControlHardwareAssertions.assertThat;
 
 public class EnvironmentControllerTest {
 
     private EnvironmentController controller;
-    private MockControlHardware hw;
+    private MockControlHardware hardware;
 
     @Before
     public void setUp() throws Exception {
-        hw = new MockControlHardware();
-        controller = new EnvironmentController(hw);
+        hardware = new MockControlHardware();
+        controller = new EnvironmentController(hardware);
     }
 
     @Test
     public void turnOnCoolerAndBlowerIfTooHot() throws Exception {
-        tooHot();
-        assertEquals("hBChl", hw.getState());
+        setupControllerWith(TOO_HOT);
+
+        assertThat(hardware)
+                .hasBlowerOn()
+                .hasCoolerOn()
+                .hasTheRestOff();
     }
 
     @Test
     public void turnOnHeaterAndBlowerIfTooCold() throws Exception {
-        tooCold();
-        assertEquals("HBchl", hw.getState());
+        setupControllerWith(TOO_COLD);
+
+        assertThat(hardware)
+                .hasBlowerOn()
+                .hasHeaterOn()
+                .hasTheRestOff();
     }
 
     @Test
     public void turnOnHiTempAlarmAtThreshold() throws Exception {
-        wayTooHot();
-        assertEquals("hBCHl", hw.getState());
+        setupControllerWith(WAY_TOO_HOT);
+
+        assertThat(hardware)
+                .hasBlowerOn()
+                .hasCoolerOn()
+                .hasHiTempAlarmOn()
+                .hasTheRestOff();
     }
 
     @Test
     public void turnOnLoTempAlarmAtThreshold() throws Exception {
-        wayTooCold();
-        assertEquals("HBchL", hw.getState());
+        setupControllerWith(WAY_TOO_COLD);
+
+        assertThat(hardware)
+                .hasBlowerOn()
+                .hasHeaterOn()
+                .hasLoTempAlarmOn()
+                .hasTheRestOff();
     }
 
-    private void tooHot() {
-        hw.setTemp(TOO_HOT);
-        controller.tic();
-    }
-
-    private void tooCold() {
-        hw.setTemp(TOO_COLD);
-        controller.tic();
-    }
-
-    private void wayTooHot() {
-        hw.setTemp(WAY_TOO_HOT);
-        controller.tic();
-    }
-
-    private void wayTooCold() {
-        hw.setTemp(WAY_TOO_COLD);
+    private void setupControllerWith(double tooHot) {
+        hardware.setTemp(tooHot);
         controller.tic();
     }
 
