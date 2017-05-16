@@ -12,6 +12,16 @@ public class MockControlHardware implements ControlHardware {
         this.temp = temp;
     }
 
+    public String getState() {
+        String state = "";
+        state += heaterState ? "H" : "h";
+        state += blowerState ? "B" : "b";
+        state += coolerState ? "C" : "c";
+        state += hiTempAlarm ? "H" : "h";
+        state += loTempAlarm ? "L" : "l";
+        return state;
+    }
+
     @Override
     public double getTemp() {
         return temp;
