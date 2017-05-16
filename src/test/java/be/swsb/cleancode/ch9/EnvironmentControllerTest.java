@@ -1,13 +1,10 @@
 package be.swsb.cleancode.ch9;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import static be.swsb.cleancode.ch9.EnvironmentController.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class EnvironmentControllerTest {
 
