@@ -6,5 +6,10 @@ public class TemperatureType {
     public static final double TOO_COLD = 11.0;
     public static final double WAY_TOO_HOT = 34.0;
     public static final double WAY_TOO_COLD = 6.0;
+    public static final double JUST_RIGHT = 18.0;
+
+    public TemperatureType() {
+    }
+
 
 }

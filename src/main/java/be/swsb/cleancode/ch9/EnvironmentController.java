@@ -4,7 +4,6 @@ import static be.swsb.cleancode.ch9.TemperatureType.*;
 
 public class EnvironmentController {
 
-
     private ControlHardware controlHardware;
 
     public EnvironmentController(ControlHardware controlHardware) {
@@ -17,48 +16,48 @@ public class EnvironmentController {
         double currentTemperature = controlHardware.getTemp();
 
         if (currentTemperature <= TOO_COLD) {
-            controlHardware.turnOnTempRegulator();
-            controlHardware.turnOnHeater();
-            if (currentTemperature <= WAY_TOO_COLD) {
-                controlHardware.turnOnLowTempAlarm();
-            } else {
-                controlHardware.turnOffLowTempAlarm();
-            }
+            turnOnHeater();
+            setLowTempAlarm(currentTemperature);
         } else if (currentTemperature >= TOO_HOT) {
-            controlHardware.turnOnTempRegulator();
-            controlHardware.turnOnCooler();
-            if (currentTemperature >= WAY_TOO_HOT) {
-                controlHardware.turnOnHighTempAlarm();
-            } else {
-                controlHardware.turnOffHighTempAlarm();
-            }
+            turnOnCooler();
+            setHighTempAlarm(currentTemperature);
         } else {
-            controlHardware.turnOffTempRegulator();
-            controlHardware.turnOffCooler();
-            controlHardware.turnOffHeater();
+            currentTemperature = JUST_RIGHT;
+            turnOffTempRegulators();
+        }
+    }
+
+    private void turnOnHeater() {
+        controlHardware.turnOnTempRegulator();
+        controlHardware.turnOnHeater();
+    }
+
+    private void setLowTempAlarm(double currentTemperature) {
+        if (currentTemperature <= WAY_TOO_COLD) {
+            controlHardware.turnOnLowTempAlarm();
+        } else {
             controlHardware.turnOffLowTempAlarm();
+        }
+    }
+
+    private void turnOnCooler() {
+        controlHardware.turnOnTempRegulator();
+        controlHardware.turnOnCooler();
+    }
+
+    private void setHighTempAlarm(double currentTemperature) {
+        if (currentTemperature >= WAY_TOO_HOT) {
+            controlHardware.turnOnHighTempAlarm();
+        } else {
             controlHardware.turnOffHighTempAlarm();
         }
     }
-}
 
-//    int month = 8;
-//    String monthString;
-//        switch (month) {
-//                case 1:  monthString = "January";
-//                break;
-//                case 2:  monthString = "February";
-//                break;
-//                case 3:  monthString = "March";
-//                break;
-//                case 4:  monthString = "April";
-//                break;
-//                case 5:  monthString = "May";
-//                break;
-//                case 6:  monthString = "June";
-//                break;
-//                case 7:  monthString = "July";
-//                break;
-//                case 8:  monthString = "August";
-//                break;
-//                case 9:  monthString = "September";
+    private void turnOffTempRegulators() {
+        controlHardware.turnOffTempRegulator();
+        controlHardware.turnOffCooler();
+        controlHardware.turnOffHeater();
+        controlHardware.turnOffLowTempAlarm();
+        controlHardware.turnOffHighTempAlarm();
+    }
+}
