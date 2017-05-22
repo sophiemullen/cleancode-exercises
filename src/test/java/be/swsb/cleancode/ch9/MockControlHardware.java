@@ -33,17 +33,17 @@ public class MockControlHardware implements ControlHardware {
     }
 
     @Override
-    public boolean hiTempAlarm() {
+    public boolean highTempAlarm() {
         return hiTempAlarm;
     }
 
     @Override
-    public boolean loTempAlarm() {
+    public boolean lowTempAlarm() {
         return loTempAlarm;
     }
 
     @Override
-    public void turnOnBlower() {
+    public void turnOnTempRegulator() {
         this.blowerState = true;
     }
 
@@ -53,7 +53,7 @@ public class MockControlHardware implements ControlHardware {
     }
 
     @Override
-    public void turnOnLoTempAlarm() {
+    public void turnOnLowTempAlarm() {
         this.loTempAlarm = true;
     }
 
@@ -63,12 +63,12 @@ public class MockControlHardware implements ControlHardware {
     }
 
     @Override
-    public void turnOnHiTempAlarm() {
+    public void turnOnHighTempAlarm() {
         this.hiTempAlarm = true;
     }
 
     @Override
-    public void turnOffBlower() {
+    public void turnOffTempRegulator() {
         this.blowerState = false;
     }
 
@@ -78,7 +78,7 @@ public class MockControlHardware implements ControlHardware {
     }
 
     @Override
-    public void turnOffLoTempAlarm() {
+    public void turnOffLowTempAlarm() {
         this.loTempAlarm = false;
     }
 
@@ -88,7 +88,7 @@ public class MockControlHardware implements ControlHardware {
     }
 
     @Override
-    public void turnOffHiTempAlarm() {
+    public void turnOffHighTempAlarm() {
         this.hiTempAlarm = false;
     }
 }

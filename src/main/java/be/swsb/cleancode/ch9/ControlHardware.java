@@ -5,16 +5,16 @@ public interface ControlHardware {
     boolean heaterState();
     boolean blowerState();
     boolean coolerState();
-    boolean hiTempAlarm();
-    boolean loTempAlarm();
-    void turnOnBlower();
+    boolean highTempAlarm();
+    boolean lowTempAlarm();
+    void turnOnTempRegulator();
     void turnOnHeater();
-    void turnOnLoTempAlarm();
+    void turnOnLowTempAlarm();
     void turnOnCooler();
-    void turnOnHiTempAlarm();
-    void turnOffBlower();
+    void turnOnHighTempAlarm();
+    void turnOffTempRegulator();
     void turnOffHeater();
-    void turnOffLoTempAlarm();
+    void turnOffLowTempAlarm();
     void turnOffCooler();
-    void turnOffHiTempAlarm();
+    void turnOffHighTempAlarm();
 }
