@@ -1,9 +1,9 @@
 package be.swsb.cleancode.ch9;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
-import static be.swsb.cleancode.ch9.EnvironmentController.*;
 import static be.swsb.cleancode.ch9.TemperatureType.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -23,9 +23,9 @@ public class EnvironmentControllerTest {
     public void turnOnCoolerAndBlowerIfTooHot() throws Exception {
         hardware.setTemp(TOO_HOT);
         controller.tic();
-        assertFalse(hardware.heaterState());
-        assertTrue(hardware.blowerState());
-        assertTrue(hardware.coolerState());
+        assertFalse(hardware.heaterIsOn());
+        assertTrue(hardware.tempRegulatorIsOn());
+        assertTrue(hardware.coolerIsOn());
         assertFalse(hardware.highTempAlarm());
         assertFalse(hardware.lowTempAlarm());
     }
@@ -34,9 +34,9 @@ public class EnvironmentControllerTest {
     public void turnOnHeaterAndBlowerIfTooCold() throws Exception {
         hardware.setTemp(TOO_COLD);
         controller.tic();
-        assertTrue(hardware.heaterState());
-        assertTrue(hardware.blowerState());
-        assertFalse(hardware.coolerState());
+        assertTrue(hardware.heaterIsOn());
+        assertTrue(hardware.tempRegulatorIsOn());
+        assertFalse(hardware.coolerIsOn());
         assertFalse(hardware.highTempAlarm());
         assertFalse(hardware.lowTempAlarm());
     }
@@ -45,9 +45,9 @@ public class EnvironmentControllerTest {
     public void turnOnHiTempAlarmAtThreshold() throws Exception {
         hardware.setTemp(WAY_TOO_HOT);
         controller.tic();
-        assertFalse(hardware.heaterState());
-        assertTrue(hardware.blowerState());
-        assertTrue(hardware.coolerState());
+        assertFalse(hardware.heaterIsOn());
+        assertTrue(hardware.tempRegulatorIsOn());
+        assertTrue(hardware.coolerIsOn());
         assertTrue(hardware.highTempAlarm());
         assertFalse(hardware.lowTempAlarm());
     }
@@ -56,9 +56,9 @@ public class EnvironmentControllerTest {
     public void turnOnLoTempAlarmAtThreshold() throws Exception {
         hardware.setTemp(WAY_TOO_COLD);
         controller.tic();
-        assertTrue(hardware.heaterState());
-        assertTrue(hardware.blowerState());
-        assertFalse(hardware.coolerState());
+        assertTrue(hardware.heaterIsOn());
+        assertTrue(hardware.tempRegulatorIsOn());
+        assertFalse(hardware.coolerIsOn());
         assertFalse(hardware.highTempAlarm());
         assertTrue(hardware.lowTempAlarm());
     }

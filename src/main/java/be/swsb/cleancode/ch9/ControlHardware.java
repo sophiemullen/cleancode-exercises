@@ -2,9 +2,9 @@ package be.swsb.cleancode.ch9;
 
 public interface ControlHardware {
     double getTemp();
-    boolean heaterState();
-    boolean blowerState();
-    boolean coolerState();
+    boolean heaterIsOn();
+    boolean tempRegulatorIsOn();
+    boolean coolerIsOn();
     boolean highTempAlarm();
     boolean lowTempAlarm();
     void turnOnTempRegulator();
@@ -17,4 +17,5 @@ public interface ControlHardware {
     void turnOffLowTempAlarm();
     void turnOffCooler();
     void turnOffHighTempAlarm();
+
 }

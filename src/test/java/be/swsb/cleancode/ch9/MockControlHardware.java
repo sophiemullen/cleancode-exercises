@@ -18,17 +18,17 @@ public class MockControlHardware implements ControlHardware {
     }
 
     @Override
-    public boolean heaterState() {
+    public boolean heaterIsOn() {
         return heaterState;
     }
 
     @Override
-    public boolean blowerState() {
+    public boolean tempRegulatorIsOn() {
         return blowerState;
     }
 
     @Override
-    public boolean coolerState() {
+    public boolean coolerIsOn() {
         return coolerState;
     }
 
