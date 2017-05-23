@@ -18,4 +18,7 @@ public interface ControlHardware {
     void turnOffCooler();
     void turnOffHighTempAlarm();
 
+//    boolean hardwareIsOn(HardWareType hardWareType);
+//    void turnHardWareOn(HardWareType hardWareType);
+//    void turnHardWareOff(HardWareType hardWareType);
 }
