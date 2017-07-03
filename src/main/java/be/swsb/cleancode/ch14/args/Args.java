@@ -9,7 +9,7 @@ public class Args {
     private boolean valid = true;
     private Set<Character> unexpectedArguments = new TreeSet<Character>();
     private Map<Character, ArgumentMarshaler> booleanArgs = new HashMap<Character, ArgumentMarshaler>();
-    private Map<Character, String> stringArgs = new HashMap<Character, String>();
+    private Map<Character, ArgumentMarshaler> stringArgs = new HashMap<Character, ArgumentMarshaler>();
     private Map<Character, Integer> intArgs = new HashMap<Character, Integer>();
     private Set<Character> argsFound = new HashSet<Character>();
     private int currentArgument;
@@ -81,7 +81,7 @@ public class Args {
     }
 
     private void parseStringSchemaElement(char elementId) {
-        stringArgs.put(elementId, "");
+        stringArgs.put(elementId, new StringArgumentMarshaler());
     }
 
     private boolean isStringSchemaElement(String elementTail) {
@@ -165,7 +165,7 @@ public class Args {
     private void setStringArg(char argChar) throws ArgsException {
         currentArgument++;
         try {
-            stringArgs.put(argChar, args[currentArgument]);
+            stringArgs.get(argChar).setString(args[currentArgument]);
         } catch (ArrayIndexOutOfBoundsException e) {
             valid = false;
             errorArgumentId = argChar;
@@ -240,7 +240,8 @@ public class Args {
     }
 
     public String getString(char arg) {
-        return blankIfNull(stringArgs.get(arg));
+        Args.ArgumentMarshaler argumentMarshaler = stringArgs.get(arg);
+        return argumentMarshaler == null ? "" :  argumentMarshaler.getString();
     }
 
     public int getInt(char arg) {
@@ -265,6 +266,7 @@ public class Args {
 
     private class ArgumentMarshaler {
         private boolean booleanValue = false;
+        private String stringValue;
 
         public void setBoolean(boolean value) {
             booleanValue = value;
@@ -272,6 +274,14 @@ public class Args {
 
         public boolean getBoolean() {
             return booleanValue;
+        }
+
+        public void setString(String string) {
+            stringValue = string;
+        }
+
+        public String getString() {
+            return stringValue == null ? "" : stringValue;
         }
     }
 
