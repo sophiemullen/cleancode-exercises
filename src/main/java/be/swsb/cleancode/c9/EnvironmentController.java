@@ -1,6 +1,4 @@
-package be.swsb.cleancode.ch9;
-
-import static be.swsb.cleancode.ch9.TemperatureType.*;
+package be.swsb.cleancode.c9;
 
 public class EnvironmentController {
 
@@ -15,14 +13,14 @@ public class EnvironmentController {
     public void tic() {
         double currentTemperature = controlHardware.getTemp();
 
-        if (currentTemperature <= TOO_COLD) {
+        if (currentTemperature <= TemperatureType.TOO_COLD) {
             turnOnHeater();
             setLowTempAlarm(currentTemperature);
-        } else if (currentTemperature >= TOO_HOT) {
+        } else if (currentTemperature >= TemperatureType.TOO_HOT) {
             turnOnCooler();
             setHighTempAlarm(currentTemperature);
         } else {
-            currentTemperature = JUST_RIGHT;
+            currentTemperature = TemperatureType.JUST_RIGHT;
             turnOffTempRegulators();
         }
     }
@@ -33,7 +31,7 @@ public class EnvironmentController {
     }
 
     private void setLowTempAlarm(double currentTemperature) {
-        if (currentTemperature <= WAY_TOO_COLD) {
+        if (currentTemperature <= TemperatureType.WAY_TOO_COLD) {
             controlHardware.turnOnLowTempAlarm();
         } else {
             controlHardware.turnOffLowTempAlarm();
@@ -46,7 +44,7 @@ public class EnvironmentController {
     }
 
     private void setHighTempAlarm(double currentTemperature) {
-        if (currentTemperature >= WAY_TOO_HOT) {
+        if (currentTemperature >= TemperatureType.WAY_TOO_HOT) {
             controlHardware.turnOnHighTempAlarm();
         } else {
             controlHardware.turnOffHighTempAlarm();

@@ -1,10 +1,9 @@
-package be.swsb.cleancode.ch9;
+package be.swsb.cleancode.c9;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
-import static be.swsb.cleancode.ch9.TemperatureType.*;
+import static be.swsb.cleancode.c9.TemperatureType.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

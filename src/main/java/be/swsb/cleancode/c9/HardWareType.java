@@ -1,4 +1,4 @@
-package be.swsb.cleancode.ch9;
+package be.swsb.cleancode.c9;
 
 public enum HardWareType {
     HEATER,
